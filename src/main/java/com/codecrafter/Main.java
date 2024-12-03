@@ -1,13 +1,21 @@
 package com.codecrafter;
 
-import com.codecrafter.database.DatabaseManager;
+import com.codecrafter.database.DatabaseRepository;
+import com.codecrafter.database.InventoryRepository;
+
+import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
         String dbFile = "gis.db";
-        DatabaseManager.initialize(dbFile);
+        DatabaseRepository dbRepo = new DatabaseRepository(dbFile);
+        try {
+            dbRepo.migrate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        System.out.println("Loading inventory database");
+        InventoryRepository repo = dbRepo;
 
         Gui.start();
     }
