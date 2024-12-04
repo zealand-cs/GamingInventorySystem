@@ -1,16 +1,43 @@
 package com.codecrafter.inventory;
 
 public abstract class Item {
-    int id;
-    ItemType type;
-    String name;
-    double weight;
-    int maxStack;
-    Boolean consumable;
+    private int id;
+    private ItemType type;
+    private String name;
+    private double weight;
+    private int maxStack;
 
-    abstract void use();
+    protected abstract void use();
 
-    double getWeight() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getWeight() {
         return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getMaxStack() {
+        return maxStack;
+    }
+
+    public void setMaxStack(int maxStack) {
+        this.maxStack = maxStack;
     }
 }
