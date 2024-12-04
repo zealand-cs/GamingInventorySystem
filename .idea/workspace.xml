@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/DatabaseRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/InventorySystemRepository.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/InvalidSlotException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Inventory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Item.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/ItemType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Slot.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/items/WeaponItem.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/items/WeaponType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Nerglej&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zealand-cs/GamingInventorySystem.git&quot;,
+    &quot;accountId&quot;: &quot;361717a2-066f-4f6f-b613-a6ce8fef6599&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2peaJp74li7rbqEog7JoW6G4Kyg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.Main.executor": "Debug",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/williamj/Zealand/Projects/GamingInventorySystem",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="jbr-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.codecrafter.Main" />
+      <module name="GamingInventorySystem" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.codecrafter.database.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="" />
+      <created>1733128928165</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733128928165</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial commit">
+      <option name="closed" value="true" />
+      <created>1733129049303</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733129049303</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Base created">
+      <option name="closed" value="true" />
+      <created>1733231454664</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733231454664</updated>
+    </task>
+    <task id="LOCAL-00003" summary="First database migrator script">
+      <option name="closed" value="true" />
+      <created>1733235785856</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733235785856</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Much more work done">
+      <option name="closed" value="true" />
+      <created>1733321042558</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733321042558</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added build parameters to pom.xml&#10;&#10;Project can now easily be ran from the terminal with maven">
+      <option name="closed" value="true" />
+      <created>1733329344752</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733329344752</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Initial commit" />
+    <MESSAGE value="Base created" />
+    <MESSAGE value="First database migrator script" />
+    <MESSAGE value="Much more work done" />
+    <MESSAGE value="Added build parameters to pom.xml&#10;&#10;Project can now easily be ran from the terminal with maven" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added build parameters to pom.xml&#10;&#10;Project can now easily be ran from the terminal with maven" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.sqlite.jdbc4.JDBC4ResultSet" memberName="colsMeta" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
