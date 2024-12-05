@@ -6,7 +6,11 @@ import com.codecrafter.exceptions.TooMuchWeightException;
 import com.codecrafter.inventory.*;
 import com.codecrafter.items.ItemManager;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Gui {
     private final InventorySystemRepository repository;
@@ -17,50 +21,62 @@ public class Gui {
     }
 
     void start() {
-        while (true) {
-            var inventory = selectInventory();
-            inventoryManagement(inventory);
+        mainLoop: while (true) {
+            System.out.println("[1] Select inventory");
+            System.out.println("[2] New inventory");
+            System.out.println("[3] Import inventory");
+            System.out.println("[0] Exit");
+
+            var inventories = repository.getInventories();
+
+            try {
+                var selectedOption = readOption(0, 3);
+                Inventory inventory = null;
+                switch (selectedOption) {
+                    case 1 -> inventory = selectInventory(inventories);
+                    case 2 -> inventory = createInventory();
+                    case 3 -> {
+                        // TODO: Import an inventory file
+                        System.out.println("Not implemented");
+                    }
+                    default -> {
+                        break mainLoop;
+                    }
+                };
+
+                if (inventory != null) {
+                    inventoryManagement(inventory);
+                }
+            } catch (InvalidInputException e) {
+                System.out.println("Invalid option");
+            }
         }
     }
 
-    Inventory selectInventory() {
-        var inventories = repository.getInventories();
-
+    private Inventory selectInventory(List<Inventory> inventories) {
         while (true) {
-            System.out.println("[0] Select inventory");
-            System.out.println("[1] New inventory");
-            System.out.println("[2] Import inventory");
-
-            var selectedOption = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (selectedOption) {
-                case 0 -> {
-                    if (inventories.isEmpty()) {
-                        System.out.println("No inventories to select");
-                    } else {
-
-                        for (int i = 0; i < (long) inventories.size(); i++) {
-                            System.out.println("[" + i + "] " + inventories.get(i).getName());
-                        }
-
-                        var inventory = scanner.nextInt();
-                        scanner.nextLine();
-                        return inventories.get(inventory);
-                    }
-                }
-                case 1 -> { return createInventory(); }
-                case 2 -> {
-                    // TODO: Import an inventory file
-                    System.out.println("Not implemented");
-                }
+            int offset = 1;
+            for (int i = 0; i < (long) inventories.size(); i++) {
+                System.out.println("[" + (i + offset) + "] " + inventories.get(i).getName());
             }
 
+            System.out.println();
+            System.out.println("[0] Back");
+
+            try {
+                var option = readOption(0, inventories.size() + offset);
+                if (option == 0) {
+                    return null;
+                }
+                return inventories.get(option - offset);
+            } catch (InvalidInputException e) {
+                System.out.println("Invalid inventory or option");
+            }
         }
     }
 
     Inventory createInventory() {
-        System.out.println("Name of the new inventory: ");
+        System.out.print("Name of the new inventory: ");
 
         var name = scanner.nextLine();
 
@@ -71,40 +87,48 @@ public class Gui {
         System.out.println("Showing inventory " + inventory.getName());
 
         inventoryLoop: while(true) {
-            System.out.println("[0] Save and leave inventory");
             System.out.println("[1] Show stats");
             System.out.println("[2] Show slots");
             System.out.println("[3] Export inventory");
-            System.out.println("[9] Delete inventory");
+            System.out.println("[4] Delete inventory");
+            System.out.println("[0] Save and leave inventory");
 
-            var selection = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                var option = readOption(0, 4);
 
-            switch (selection) {
-                case 0 -> {
-                    repository.deleteInventory(inventory.getId());
-                    repository.saveInventory(inventory);
-                    break inventoryLoop;
+                switch (option) {
+                    case 0 -> {
+                        repository.deleteInventory(inventory.getId());
+                        repository.saveInventory(inventory);
+                        break inventoryLoop;
+                    }
+                    case 1 -> {
+                        System.out.println("Name: " + inventory.getName());
+                        System.out.println("Weight: " + inventory.getWeight());
+                        System.out.println("Unlocked slots: " + inventory.getUnlockedSlots());
+                        System.out.println();
+                    }
+                    case 2 -> manageSlots(inventory);
+                    case 3 -> {
+                        // TODO: Implement export to file
+                        System.out.println("Not implemented");
+                    }
+                    case 4 -> {
+                        repository.deleteInventory(inventory.getId());
+                        System.out.println("Deleted inventory");
+                        break inventoryLoop;
+                    }
                 }
-                case 1 -> {
-                    System.out.println("Name: " + inventory.getName());
-                    System.out.println("Weight: " + inventory.getWeight());
-                    System.out.println("Unlocked slots: " + inventory.getUnlockedSlots());
-                }
-                case 2 -> manageSlots(inventory);
-                case 3 -> {
-                    // TODO: Implement export to file
-                    System.out.println("Not implemented");
-                }
-                case 9 -> {
-                    repository.deleteInventory(inventory.getId());
-                    System.out.println("Deleted inventory");
-                    break inventoryLoop;
-                }
+            } catch (InvalidInputException e) {
+                throw new RuntimeException(e);
             }
+
         }
     }
 
+    /// Prints all inventory slots in the terminal shown as options. Starting at selection index startIndex.
+    ///
+    /// Returns an int which is the latest index showed
     int showInventory(Inventory inventory) {
         int rowLength = 8;
 
@@ -136,73 +160,73 @@ public class Gui {
             System.out.println("[" + (latestOption + 1) + "] Back");
             System.out.println("[" + (latestOption + 2) + "] Sort");
 
-            int field = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                var option = readOption(0, latestOption + 2);
 
-            if (field >= 0 && field < inventory.getUnlockedSlots()) {
-                try {
-                    manageSlot(inventory, field);
-                } catch (Exception e) {
-                    System.out.println("Invalid slot");
+                if (option == inventory.getUnlockedSlots()) {
+                    break;
+                } else if (option == inventory.getUnlockedSlots() + 1) {
+                    sortSlots(inventory);
+                } else {
+                    manageSlot(inventory, option);
                 }
-            } else if (field == inventory.getUnlockedSlots()) {
-                break;
-            } else if (field == inventory.getUnlockedSlots() + 1) {
-                sortSlots(inventory);
+            } catch (InvalidInputException e) {
+                System.out.println("Invalid slot or option selected");
             }
         }
     }
 
 
     void sortSlots(Inventory inventory) {
-        System.out.println("[0] Back");
-        System.out.println("[1] Sort by id");
-        System.out.println("[2] Sort by name");
-        System.out.println("[3] Sort by item type");
-        System.out.println("[4] Sort by weight");
+        while (true) {
+            System.out.println("[1] Sort by id");
+            System.out.println("[2] Sort by name");
+            System.out.println("[3] Sort by item type");
+            System.out.println("[4] Sort by weight");
+            System.out.println("[0] Back");
 
-        var input = scanner.nextInt();
-        scanner.nextLine();
+            try {
+                var option = readOption(0, 4);
 
-        // Handle input. If zero, none are hit and the function returns anyway.
-        switch (input) {
-            case 1 -> inventory.sortInventory(SortValue.Id);
-            case 2 -> inventory.sortInventory(SortValue.Alphabetical);
-            case 3 -> inventory.sortInventory(SortValue.ItemType);
-            case 4 -> inventory.sortInventory(SortValue.Weight);
+                switch (option) {
+                    case 0 -> { /* Continues without doing anything */ }
+                    case 1 -> inventory.sortInventory(SortValue.Id);
+                    case 2 -> inventory.sortInventory(SortValue.Alphabetical);
+                    case 3 -> inventory.sortInventory(SortValue.ItemType);
+                    case 4 -> inventory.sortInventory(SortValue.Weight);
+                }
+
+                break;
+            } catch (InvalidInputException e) {
+                System.out.println("Invalid option selected");
+            }
         }
     }
 
 
-    void manageSlot(Inventory inventory, int slotIndex) throws InvalidSlotException {
+    void manageSlot(Inventory inventory, int slotIndex) throws InvalidInputException {
         manageSlotLoop: while (true) {
-            Slot slot = inventory.getSlot(slotIndex);
+            Slot slot = null;
+            try {
+                slot = inventory.getSlot(slotIndex);
+            } catch (InvalidSlotException e) {
+                throw new InvalidInputException();
+            }
 
             if (slot.isEmpty()) {
                 System.out.println("Slot is empty");
-                System.out.println("[0] Back");
                 System.out.println("[1] Insert item");
+                System.out.println("[0] Back");
 
-                var option = scanner.nextInt();
-                scanner.nextLine();
+                try {
+                    var option = readOption(0, 1);
 
-                if (option == 0) {
-                    break;
-                } else if (option == 1) {
-                    var items = ItemManager.getInstance().getItems();
-                    System.out.println("Select item to insert");
-
-                    for (int i = 0; i < items.size(); i++) {
-                        Item item = items.get(i);
-                        System.out.println("[" + i + "] " + item.getName());
+                    switch (option) {
+                        case 0 -> { break manageSlotLoop; }
+                        case 1 -> insertItemToSlot(slot);
                     }
-
-                    var itemSelect = scanner.nextInt();
-                    scanner.nextLine();
-
-                    Item item = items.get(itemSelect);
-                    slot.setItem(item);
-                    slot.setCount(1);
+                } catch (InvalidInputException e) {
+                    System.out.println("Invalid input");
                 }
             } else {
                 System.out.println("Item: " + slot.getItem().getName() + "(id: " + slot.getItem().getId() + ")");
@@ -210,48 +234,104 @@ public class Gui {
                 System.out.println("Weight: " + slot.getWeight());
                 System.out.println();
 
-                System.out.println("[0] Back");
                 System.out.println("[1] Use item");
                 System.out.println("[2] Increment");
                 System.out.println("[3] Decrement");
                 System.out.println("[4] Remove item");
                 System.out.println("[5] Swap item");
+                System.out.println("[0] Back");
 
-                var option = scanner.nextInt();
-                scanner.nextLine();
+                try {
+                    var option = readOption(0, 5);
 
-                // Handle selection
-                switch (option) {
-                    case 0 -> { break manageSlotLoop; }
-                    case 1 -> slot.use();
-                    case 2 -> {
-                        try {
-                            inventory.incrementSlot(slotIndex);
-                        } catch (TooMuchWeightException e) {
-                            System.out.println("Too much weight to add more items to inventory");
+                    // Handle selection
+                    switch (option) {
+                        case 0 -> { break manageSlotLoop; }
+                        case 1 -> slot.use();
+                        case 2 -> {
+                            try {
+                                inventory.incrementSlot(slotIndex);
+                            } catch (TooMuchWeightException e) {
+                                System.out.println("Too much weight to add more items to inventory");
+                            }
                         }
+                        case 3 -> inventory.decrementSlot(slotIndex);
+                        case 4 -> inventory.clearSlot(slotIndex);
+                        case 5 -> { swapSlots(inventory, slotIndex); break manageSlotLoop; }
                     }
-                    case 3 -> inventory.decrementSlot(slotIndex);
-                    case 4 -> inventory.clearSlot(slotIndex);
-                    case 5 -> { swapSlots(inventory, slotIndex); break manageSlotLoop; }
+                } catch (InvalidInputException e) {
+                    System.out.println("Invalid input");
                 }
             }
         }
     }
 
-    void swapSlots(Inventory inventory, int slot1) {
-        System.out.println("Select slot to swap with");
+    private void insertItemToSlot(Slot slot) {
+        while (true) {
+            var items = ItemManager.getInstance().getItems();
+            System.out.println("Select item to insert");
 
-        var latestOption = showInventory(inventory);
+            for (int i = 0; i < items.size(); i++) {
+                Item item = items.get(i);
+                System.out.println("[" + i + "] " + item.getName());
+            }
 
-        System.out.println("[" + (latestOption + 1) + "] Back");
+            try {
+                var option = readOption(0, items.size() - 1);
 
-        var input = scanner.nextInt();
-        scanner.nextLine();
+                Item item = items.get(option);
+                slot.setItem(item);
+                slot.setCount(1);
 
-        if (input >= 0 && input < inventory.getUnlockedSlots()) {
-            inventory.swapSlots(slot1, input);
-            System.out.println("Swapped slots");
+                break;
+            } catch (InvalidInputException e) {
+                System.out.println("Invalid item selected");
+            }
         }
     }
+
+    void swapSlots(Inventory inventory, int slot1) {
+        while (true) {
+            System.out.println("Select slot to swap with");
+
+            var latest = showInventory(inventory);
+            System.out.println("[" + (latest + 1) + "] Back");
+
+            try {
+                var inputOption = readOption(0, latest + 1);
+
+                if (inputOption != latest + 1) {
+                    inventory.swapSlots(slot1, inputOption);
+                    System.out.println("Swapped slots");
+                    break;
+                }
+            } catch (InvalidInputException e) {
+                System.out.println("Invalid option");
+            }
+
+        }
+    }
+
+    /// Read a number input between min (inclusive) and max (inclusive).
+    ///
+    /// If the number is not in this range, invalidInputText is printed, and you
+    /// get to choose again
+    int readOption(int min, int max) throws InvalidInputException {
+        return readOption(IntStream.rangeClosed(min, max).toArray());
+    }
+
+    /// Read a number input in an array that's allowed
+    int readOption(int[] allowed) throws InvalidInputException {
+        var option = scanner.nextInt();
+        scanner.nextLine();
+
+        if (IntStream.of(allowed).anyMatch(x -> x == option)) {
+            return option;
+        }
+        throw new InvalidInputException();
+    }
+}
+
+class InvalidInputException extends IOException {
+
 }
