@@ -1,6 +1,7 @@
 package com.codecrafter.database;
 
 import com.codecrafter.inventory.Inventory;
+import com.codecrafter.inventory.Item;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -51,27 +52,27 @@ public class DatabaseRepository implements InventorySystemRepository {
             );
             statement.addBatch(
                     "CREATE TABLE inventory_slots (" +
-                            "id integer PRIMARY KEY," +
-                            "inventory integer REFERENCES inventory(id)," +
-                            "count integer" +
-                            "position integer" +
+                            "id INTEGER PRIMARY KEY," +
+                            "inventory INTEGER REFERENCES inventory(id)," +
+                            "count INTEGER" +
+                            "position INTEGER" +
                     ")"
             );
             statement.addBatch(
                     "CREATE TABLE inventory_items (" +
-                            "id integer PRIMARY KEY," +
-                            "slot integer REFERENCES inventory_slots(id)," +
-                            "itemType varchar(128)," +
-                            "name varchar(256)," +
-                            "weight real," +
-                            "maxStack integer" +
+                            "id INTEGER PRIMARY KEY," +
+                            "slot INTEGER REFERENCES inventory_slots(id)," +
+                            "itemType VARCHAR(128)," +
+                            "name VARCHAR(256)," +
+                            "weight REAL," +
+                            "maxStack INTEGER" +
                     ")"
             );
             statement.addBatch(
-                    "CREATE TABLE item_attributes (" +
-                            "id integer PRIMARY KEY," +
-                            "name varchar(64)," +
-                            "value varchar(128)" +
+                    "CREATE TABLE inventory_item_attributes (" +
+                            "id INTEGER PRIMARY KEY," +
+                            "name VARCHAR(64)," +
+                            "value BLOB" +
                     ")"
             );
         }
@@ -120,5 +121,10 @@ public class DatabaseRepository implements InventorySystemRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public List<Item> getItems() {
+        return List.of();
     }
 }

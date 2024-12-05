@@ -2,6 +2,7 @@ package com.codecrafter.inventory;
 
 public enum ItemType {
     Weapon,
+    ThrowingWeapon,
     Armor,
-    Potion
+    ConsumablePotion,
 }

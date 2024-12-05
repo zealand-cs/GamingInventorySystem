@@ -10,6 +10,10 @@ public class Inventory {
         this.id = id;
         this.name = name;
         this.unlockedSlots = unlockedSlots;
+
+        for (int i = 0; i < slots.length; i++) {
+            slots[i] = new Slot();
+        }
     }
 
     private Slot[] slots = new Slot[192];

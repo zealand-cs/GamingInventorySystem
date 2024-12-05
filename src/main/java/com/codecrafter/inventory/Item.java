@@ -7,6 +7,14 @@ public abstract class Item {
     private double weight;
     private int maxStack;
 
+    public Item(int id, ItemType type, String name, double weight, int maxStack) {
+        this.id = id;
+        this.type = type;
+        this.name = name;
+        this.weight = weight;
+        this.maxStack = maxStack;
+    }
+
     protected abstract void use();
 
     public int getId() {

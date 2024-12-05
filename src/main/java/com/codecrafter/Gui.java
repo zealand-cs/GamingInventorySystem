@@ -3,8 +3,9 @@ package com.codecrafter;
 import com.codecrafter.database.InventorySystemRepository;
 import com.codecrafter.inventory.InvalidSlotException;
 import com.codecrafter.inventory.Inventory;
+import com.codecrafter.inventory.Item;
 import com.codecrafter.inventory.Slot;
-import org.jetbrains.annotations.Nullable;
+import com.codecrafter.items.ItemManager;
 
 import java.util.Scanner;
 
@@ -50,6 +51,7 @@ public class Gui {
             } else if (optionInput == 1) {
                 return createInventory();
             } else if (optionInput == 2) {
+                // TODO: Import an inventory file
                 System.out.println("Not implemented");
             }
         }
@@ -63,12 +65,6 @@ public class Gui {
         return inventory;
     }
 
-    void deleteInventory() {
-        System.out.println("Choose which inventory to delete");
-        var inventory = selectInventory();
-        repository.deleteInventory(inventory.getId());
-    }
-
     void inventoryManagement(Inventory inventory) {
         System.out.println("Showing inventory " + inventory.getName());
 
@@ -76,6 +72,7 @@ public class Gui {
             System.out.println("[0] Save and leave inventory");
             System.out.println("[1] Show stats");
             System.out.println("[2] Show slots");
+            System.out.println("[3] Export inventory");
             System.out.println("[9] Delete inventory");
 
             var selection = scanner.nextInt();
@@ -89,6 +86,9 @@ public class Gui {
                 System.out.println("Unlocked slots: " + inventory.getUnlockedSlots());
             } else if (selection == 2) {
                 manageSlots(inventory);
+            } else if (selection == 3) {
+                // TODO: Implement export to file
+                System.out.println("Not implemented");
             } else if (selection == 9) {
                 repository.deleteInventory(inventory.getId());
                 System.out.println("Deleted inventory");
@@ -98,11 +98,8 @@ public class Gui {
     }
 
     void manageSlots(Inventory inventory) {
-        var slots = inventory.getSlots();
-
         while (true) {
             int rowLength = 8;
-            System.out.println("[0] Back");
 
             // Print out rows of rowLength with slots in the inventory
             for (int row = 0; row < inventory.getUnlockedSlots() / rowLength; row++) {
@@ -111,10 +108,11 @@ public class Gui {
                     try {
                         var slot = inventory.getSlot(index);
 
-                        if (slot != null) {
-                            System.out.print("| [" + (index + 1) + "] " + slot.getItem().getName() + " (" + slot.getCount() + ") ");
+                        if (slot.isNotEmpty()) {
+                            System.out.print("| [" + index + "] " + slot.getItem().getName() + " (" + slot.getCount() + ") ");
+                        } else {
+                            System.out.print("| [" + index + "] empty ");
                         }
-                        System.out.print("| [" + (index + 1) + "] empty ");
                     } catch (InvalidSlotException e) {
                         System.out.println("Invalid slot used");
                     }
@@ -122,17 +120,19 @@ public class Gui {
                 System.out.println("|");
             }
 
+            System.out.println("[" + inventory.getUnlockedSlots() + "] Back");
+
             int field = scanner.nextInt();
             scanner.nextLine();
 
-            if (field == 0) {
-                break;
-            } else if (field >= 1 || field <= inventory.getUnlockedSlots() + 1) {
+            if (field >= 0 || field < inventory.getUnlockedSlots()) {
                 try {
-                    manageSlot(inventory, field - 1);
+                    manageSlot(inventory, field);
                 } catch (Exception e) {
                     System.out.println("Invalid slot");
                 }
+            } else if (field == inventory.getUnlockedSlots() + 1) {
+                break;
             }
         }
     }
@@ -141,7 +141,7 @@ public class Gui {
         while (true) {
             Slot slot = inventory.getSlot(slotIndex);
 
-            if (slot == null) {
+            if (slot.isEmpty()) {
                 System.out.println("Slot is empty");
                 System.out.println("[0] Back");
                 System.out.println("[1] Insert item");
@@ -152,7 +152,20 @@ public class Gui {
                 if (option == 0) {
                     break;
                 } else if (option == 1) {
-                    // TODO
+                    var items = ItemManager.getInstance().getItems();
+                    System.out.println("Select item to insert");
+
+                    for (int i = 0; i < items.size(); i++) {
+                        Item item = items.get(i);
+                        System.out.println("[" + i + "] " + "(" + item.getId() + ") " + item.getName());
+                    }
+
+                    var itemSelect = scanner.nextInt();
+                    scanner.nextLine();
+
+                    Item item = items.get(itemSelect);
+                    slot.setItem(item);
+                    slot.setCount(1);
                 }
             } else {
                 System.out.println("Item: " + slot.getItem().getName() + "(id: " + slot.getItem().getId() + ")");
@@ -178,7 +191,7 @@ public class Gui {
                 } else if (option == 3) {
                     slot.setCount(slot.getCount() - 1);
                 } else if (option == 4) {
-                    inventory.emptySlot(slot);
+                    slot.clear();
                 }
             }
         }

@@ -30,9 +30,6 @@
                 <version>3.5.0</version>
                 <configuration>
                     <mainClass>com.codecrafer.Main</mainClass>
-                    <arguments>
-                        <argument>argument1</argument>
-                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
