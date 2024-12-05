@@ -8,6 +8,7 @@ import java.util.List;
 public interface InventorySystemRepository {
     List<Inventory> getInventories();
 
+    Inventory newInventory(String name, int unlockedSlots);
     void saveInventory(Inventory inventory);
     void deleteInventory(int inventoryId);
 

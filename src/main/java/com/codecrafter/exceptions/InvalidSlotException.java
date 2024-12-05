@@ -1,4 +1,4 @@
-package com.codecrafter.inventory;
+package com.codecrafter.exceptions;
 
 public class InvalidSlotException extends Exception {
     

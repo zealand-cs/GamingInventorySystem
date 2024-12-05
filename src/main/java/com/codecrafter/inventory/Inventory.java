@@ -1,5 +1,11 @@
 package com.codecrafter.inventory;
 
+import com.codecrafter.exceptions.InvalidSlotException;
+import com.codecrafter.exceptions.TooMuchWeightException;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Inventory {
     private int id;
     private String name;
@@ -16,7 +22,7 @@ public class Inventory {
         }
     }
 
-    private Slot[] slots = new Slot[192];
+    private final Slot[] slots = new Slot[192];
     private int unlockedSlots;
 
     public int getId() {
@@ -44,7 +50,7 @@ public class Inventory {
     }
 
     public Slot[] getSlots() {
-        return slots;
+        return Arrays.copyOfRange(slots, 0, unlockedSlots);
     }
 
     public Slot getSlot(int index) throws InvalidSlotException {
@@ -61,12 +67,26 @@ public class Inventory {
         }
     }
 
-    public void emptySlot(Slot slot) {
-        for (int i = 0; i < slots.length; i++) {
-            if (slots[i] == slot) {
-                slots[i] = null;
+    public void incrementSlot(int slotIndex) throws TooMuchWeightException {
+        Slot slot = slots[slotIndex];
+        if (slot != null) {
+            if (getWeight() + slot.getItem().getWeight() > MAX_WEIGHT) {
+                throw new TooMuchWeightException();
             }
+
+            slot.incrementCount();
         }
+    }
+
+    public void decrementSlot(int slotIndex) {
+        Slot slot = slots[slotIndex];
+        if (slot != null) {
+            slot.decrementCount();
+        }
+    }
+
+    public void clearSlot(int slotIndex) {
+        slots[slotIndex].clear();
     }
 
     public double getWeight() {
@@ -77,6 +97,85 @@ public class Inventory {
             }
         }
         return weight;
+    }
+
+    public void addItem(Item item) {
+        // TODO
+    }
+
+    public void sortInventory(SortValue sort) {
+        switch (sort) {
+            case SortValue.Id -> Arrays.sort(slots, new SortById());
+            case SortValue.Alphabetical -> Arrays.sort(slots, new SortByAlphabetical());
+            case SortValue.ItemType -> Arrays.sort(slots, new SortByItemType());
+            case SortValue.Weight -> Arrays.sort(slots, new SortByWeight());
+        }
+    }
+
+    public void swapSlots(int slot1, int slot2) {
+        Slot tmp = slots[slot1];
+        slots[slot1] = slots[slot2];
+        slots[slot2] = tmp;
+    }
+}
+
+class SortById implements Comparator<Slot> {
+    @Override
+    public int compare(Slot x, Slot y) {
+        if (x.isEmpty() && y.isEmpty()) {
+            return 0;
+        } else if (x.isEmpty()) {
+            return 1;
+        } else if (y.isEmpty()) {
+            return -1;
+        }
+
+        return x.getItem().getId() - y.getItem().getId();
+    }
+}
+
+class SortByAlphabetical implements Comparator<Slot> {
+    @Override
+    public int compare(Slot x, Slot y) {
+        if (x.isEmpty() && y.isEmpty()) {
+            return 0;
+        } else if (x.isEmpty()) {
+            return 1;
+        } else if (y.isEmpty()) {
+            return -1;
+        }
+
+        return x.getItem().getName().compareTo(y.getItem().getName());
+    }
+}
+
+class SortByItemType implements Comparator<Slot> {
+    @Override
+    public int compare(Slot x, Slot y) {
+        if (x.isEmpty() && y.isEmpty()) {
+            return 0;
+        } else if (x.isEmpty()) {
+            return 1;
+        } else if (y.isEmpty()) {
+            return -1;
+        }
+
+        return x.getItem().getType().ordinal() - y.getItem().getType().ordinal();
+    }
+}
+
+class SortByWeight implements Comparator<Slot> {
+    @Override
+    public int compare(Slot x, Slot y) {
+        if (x.isEmpty() && y.isEmpty()) {
+            return 0;
+        } else if (x.isEmpty()) {
+            return 1;
+        } else if (y.isEmpty()) {
+            return -1;
+        }
+
+        return (int)(x.getWeight() * 100) - (int)(y.getWeight() * 100);
     }
 }
 

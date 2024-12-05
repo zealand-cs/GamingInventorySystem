@@ -4,33 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="For some reason, IntelliJ didn't wan't to work with jdk22 (???) so switched to jdk21 and it worked">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ArmorItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ConsumablePotion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ItemManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ThrowingWeapon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/WeaponHandedness.java" afterDir="false" />
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Added files for different scenarios">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/TooMuchWeightException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/SortValue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gis.db" beforeDir="false" afterPath="$PROJECT_DIR$/gis.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/DatabaseRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/DatabaseRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/InventorySystemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/InventorySystemRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/InvalidSlotException.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Inventory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/ItemType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/ItemType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Slot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Slot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/items/WeaponItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/items/WeaponItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/items/WeaponType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/items/WeaponType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/items/WeaponType.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/DatabaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/DatabaseRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/InvalidSlotException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidSlotException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/ItemType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/ItemType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Slot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/WeaponItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/WeaponItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ConsumablePotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ConsumablePotion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,8 +162,27 @@
       <option name="project" value="LOCAL" />
       <updated>1733334348084</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added files for different scenarios">
+      <option name="closed" value="true" />
+      <created>1733390459197</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1733390459197</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -175,7 +192,8 @@
     <MESSAGE value="Much more work done" />
     <MESSAGE value="Added build parameters to pom.xml&#10;&#10;Project can now easily be ran from the terminal with maven" />
     <MESSAGE value="For some reason, IntelliJ didn't wan't to work with jdk22 (???) so switched to jdk21 and it worked" />
-    <option name="LAST_COMMIT_MESSAGE" value="For some reason, IntelliJ didn't wan't to work with jdk22 (???) so switched to jdk21 and it worked" />
+    <MESSAGE value="Added files for different scenarios" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added files for different scenarios" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

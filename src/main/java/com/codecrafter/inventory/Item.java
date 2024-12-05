@@ -25,6 +25,14 @@ public abstract class Item {
         this.id = id;
     }
 
+    public ItemType getType() {
+        return type;
+    }
+
+    public void setType(ItemType type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
