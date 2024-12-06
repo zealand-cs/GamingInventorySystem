@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Saving and restoring now works completely. All items and all data is now stored in a file for all inventories.">
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Removed redundant code">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/MalformedFileException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gis.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventories.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/DatabaseRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Inventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +55,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Main.executor": "Debug",
+    "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "true",
@@ -187,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733480692649</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Removed redundant code">
+      <option name="closed" value="true" />
+      <created>1733481094662</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1733481094662</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,7 +220,8 @@
     <MESSAGE value="Much better interface and input control" />
     <MESSAGE value="Program doesn't crash when inputting invalid character" />
     <MESSAGE value="Saving and restoring now works completely. All items and all data is now stored in a file for all inventories." />
-    <option name="LAST_COMMIT_MESSAGE" value="Saving and restoring now works completely. All items and all data is now stored in a file for all inventories." />
+    <MESSAGE value="Removed redundant code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed redundant code" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

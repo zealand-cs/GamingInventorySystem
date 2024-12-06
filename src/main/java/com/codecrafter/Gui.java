@@ -327,11 +327,19 @@ public class Gui {
     /// If the number is not in this range, invalidInputText is printed, and you
     /// get to choose again
     int readOption(int min, int max) throws InvalidInputException {
-        return readOption(IntStream.rangeClosed(min, max).toArray());
+        return readOption(scanner, min, max);
+    }
+
+    int readOption(int[] allowed) throws InvalidInputException {
+        return readOption(scanner, allowed);
+    }
+
+    static int readOption(Scanner scanner, int min, int max) throws InvalidInputException {
+        return readOption(scanner, IntStream.rangeClosed(min, max).toArray());
     }
 
     /// Read a number input in an array that's allowed
-    int readOption(int[] allowed) throws InvalidInputException {
+    static int readOption(Scanner scanner, int[] allowed) throws InvalidInputException {
         try {
             var option = scanner.nextInt();
             scanner.nextLine();

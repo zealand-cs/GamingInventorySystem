@@ -38,23 +38,22 @@ public class FileRepository implements InventorySystemRepository {
     String fileName;
     InventoryFile inventoryFile;
 
-    public FileRepository(String fileName) {
+    public FileRepository(String fileName) throws MalformedFileException {
         this.fileName = fileName;
         this.inventoryFile = readInventoryFile();
     }
 
-    InventoryFile readInventoryFile() {
+    InventoryFile readInventoryFile() throws MalformedFileException {
         try {
             File file = new File(fileName);
             if (file.createNewFile()) {
-                System.out.println("Created new storage file");
                 return new InventoryFile();
             } else {
                 var mapper = new ObjectMapper();
                 return mapper.readValue(file, InventoryFile.class);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new MalformedFileException();
         }
     }
 
@@ -95,3 +94,4 @@ public class FileRepository implements InventorySystemRepository {
         return List.of();
     }
 }
+
