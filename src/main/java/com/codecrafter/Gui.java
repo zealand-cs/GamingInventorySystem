@@ -8,6 +8,7 @@ import com.codecrafter.items.ItemManager;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -322,13 +323,20 @@ public class Gui {
 
     /// Read a number input in an array that's allowed
     int readOption(int[] allowed) throws InvalidInputException {
-        var option = scanner.nextInt();
-        scanner.nextLine();
+        try {
+            var option = scanner.nextInt();
+            scanner.nextLine();
 
-        if (IntStream.of(allowed).anyMatch(x -> x == option)) {
-            return option;
+            // Return value if it matches any allowed inputs
+            if (IntStream.of(allowed).anyMatch(x -> x == option)) {
+                return option;
+            }
+
+            throw new InvalidInputException();
+        } catch (InputMismatchException e) {
+            scanner.next();
+            throw new InvalidInputException();
         }
-        throw new InvalidInputException();
     }
 }
 
