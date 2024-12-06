@@ -2,6 +2,7 @@ package com.codecrafter.inventory;
 
 import com.codecrafter.exceptions.InvalidSlotException;
 import com.codecrafter.exceptions.TooMuchWeightException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -10,7 +11,13 @@ public class Inventory {
     private int id;
     private String name;
 
+    private final Slot[] slots = new Slot[192];
+    private int unlockedSlots;
+
     final static double MAX_WEIGHT = 50;
+
+    // Private constructor for JSON reading
+    private Inventory() { }
 
     public Inventory(int id, String name, int unlockedSlots) {
         this.id = id;
@@ -21,9 +28,6 @@ public class Inventory {
             slots[i] = new Slot();
         }
     }
-
-    private final Slot[] slots = new Slot[192];
-    private int unlockedSlots;
 
     public int getId() {
         return id;
@@ -61,9 +65,16 @@ public class Inventory {
         return slots[index];
     }
 
-    public void insertSlot(Slot slot, int index) {
-        if (getWeight() + slot.getWeight() <= MAX_WEIGHT) {
-            slots[index] = slot;
+    public void insertToSlot(int slotIndex, Item item, int count) throws TooMuchWeightException {
+        Slot slot = slots[slotIndex];
+
+        if (slot != null) {
+            if (getWeight() + (item.getWeight() * count) > MAX_WEIGHT) {
+                throw new TooMuchWeightException();
+            }
+
+            slot.setItem(item);
+            slot.setCount(count);
         }
     }
 
@@ -86,9 +97,13 @@ public class Inventory {
     }
 
     public void clearSlot(int slotIndex) {
-        slots[slotIndex].clear();
+        Slot slot = slots[slotIndex];
+        if (slot != null) {
+            slot.clear();
+        }
     }
 
+    @JsonIgnore
     public double getWeight() {
         double weight = 0;
         for (var slot : slots) {

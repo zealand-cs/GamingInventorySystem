@@ -1,5 +1,7 @@
 package com.codecrafter.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Slot {
     private Item item;
     private int count;
@@ -17,19 +19,25 @@ public class Slot {
         return item;
     }
 
+    @JsonIgnore
     public boolean isEmpty() {
         return count <= 0 || item == null;
     }
 
+    @JsonIgnore
     public boolean isNotEmpty() {
         return item != null && count > 0;
     }
 
     public void setCount(int count) {
-        if (count > item.getMaxStack()) {
-            this.count = item.getMaxStack();
+        if (item == null) {
+            this.count = 0;
         } else {
-            this.count = Math.max(count, 0);
+            if (count > item.getMaxStack()) {
+                this.count = item.getMaxStack();
+            } else {
+                this.count = Math.max(count, 0);
+            }
         }
     }
 
@@ -37,6 +45,7 @@ public class Slot {
         return count;
     }
 
+    @JsonIgnore
     public double getWeight() {
         if (isEmpty()) {
             return 0;

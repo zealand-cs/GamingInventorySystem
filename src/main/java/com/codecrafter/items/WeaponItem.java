@@ -8,6 +8,8 @@ public class WeaponItem extends Item {
     private double damage;
     private int durability;
 
+    public WeaponItem() { }
+
     public WeaponItem(int id, String name, double weight, int maxStack, WeaponHandedness weaponHandedness, double damage, int durability) {
         super(id, ItemType.Weapon, name, weight, maxStack);
         this.weaponHandedness = weaponHandedness;

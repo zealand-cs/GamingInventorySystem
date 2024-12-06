@@ -1,13 +1,12 @@
 package com.codecrafter;
 
 import com.codecrafter.database.InventorySystemRepository;
+import com.codecrafter.exceptions.InvalidInputException;
 import com.codecrafter.exceptions.InvalidSlotException;
 import com.codecrafter.exceptions.TooMuchWeightException;
 import com.codecrafter.inventory.*;
 import com.codecrafter.items.ItemManager;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -31,11 +30,12 @@ public class Gui {
             var inventories = repository.getInventories();
 
             try {
-                var selectedOption = readOption(0, 3);
+                var option = readOption(0, 3);
+
                 Inventory inventory = null;
-                switch (selectedOption) {
-                    case 1 -> inventory = selectInventory(inventories);
-                    case 2 -> inventory = createInventory();
+                switch (option) {
+                    case 1 -> inventory = selectInventoryPrompt(inventories);
+                    case 2 -> inventory = createInventoryPrompt();
                     case 3 -> {
                         // TODO: Import an inventory file
                         System.out.println("Not implemented");
@@ -54,11 +54,24 @@ public class Gui {
         }
     }
 
-    private Inventory selectInventory(List<Inventory> inventories) {
+    Inventory createInventoryPrompt() {
+        System.out.print("Name of the new inventory: ");
+
+        var name = scanner.nextLine();
+
+        return repository.newInventory(name.trim(), 32);
+    }
+
+    private Inventory selectInventoryPrompt(List<Inventory> inventories) {
         while (true) {
             int offset = 1;
+
             for (int i = 0; i < (long) inventories.size(); i++) {
                 System.out.println("[" + (i + offset) + "] " + inventories.get(i).getName());
+            }
+
+            if (inventories.isEmpty()) {
+                System.out.println("No inventories exist");
             }
 
             System.out.println();
@@ -76,46 +89,30 @@ public class Gui {
         }
     }
 
-    Inventory createInventory() {
-        System.out.print("Name of the new inventory: ");
-
-        var name = scanner.nextLine();
-
-        return repository.newInventory(name, 32);
-    }
-
     void inventoryManagement(Inventory inventory) {
-        System.out.println("Showing inventory " + inventory.getName());
-
         inventoryLoop: while(true) {
-            System.out.println("[1] Show stats");
-            System.out.println("[2] Show slots");
-            System.out.println("[3] Export inventory");
-            System.out.println("[4] Delete inventory");
+            printInventoryStats(inventory);
+
+            System.out.print("[1] Show slots ");
+            System.out.print("[2] Export inventory ");
+            System.out.println("[3] Delete inventory ");
             System.out.println("[0] Save and leave inventory");
 
             try {
-                var option = readOption(0, 4);
+                var option = readOption(0, 3);
 
                 switch (option) {
                     case 0 -> {
-                        repository.deleteInventory(inventory.getId());
                         repository.saveInventory(inventory);
                         break inventoryLoop;
                     }
-                    case 1 -> {
-                        System.out.println("Name: " + inventory.getName());
-                        System.out.println("Weight: " + inventory.getWeight());
-                        System.out.println("Unlocked slots: " + inventory.getUnlockedSlots());
-                        System.out.println();
-                    }
-                    case 2 -> manageSlots(inventory);
-                    case 3 -> {
+                    case 1 -> manageSlotsPrompt(inventory);
+                    case 2 -> {
                         // TODO: Implement export to file
                         System.out.println("Not implemented");
                     }
-                    case 4 -> {
-                        repository.deleteInventory(inventory.getId());
+                    case 3 -> {
+                        repository.deleteInventory(inventory);
                         System.out.println("Deleted inventory");
                         break inventoryLoop;
                     }
@@ -127,10 +124,17 @@ public class Gui {
         }
     }
 
+    private static void printInventoryStats(Inventory inventory) {
+        System.out.println("Name: " + inventory.getName());
+        System.out.println("Weight: " + inventory.getWeight());
+        System.out.println("Unlocked slots: " + inventory.getUnlockedSlots());
+        System.out.println();
+    }
+
     /// Prints all inventory slots in the terminal shown as options. Starting at selection index startIndex.
     ///
     /// Returns an int which is the latest index showed
-    int showInventory(Inventory inventory) {
+    int printInventorySlots(Inventory inventory, int offset) {
         int rowLength = 8;
 
         var slots = inventory.getSlots();
@@ -142,34 +146,36 @@ public class Gui {
                 System.out.println("|");
             }
 
+            var visualIndex = i + offset;
             if (slot.isNotEmpty()) {
-                System.out.print("| [" + i + "] " + slot.getItem().getName() + " (" + slot.getCount() + ") ");
+                System.out.print("| [" + visualIndex + "] " + slot.getItem().getName() + " (" + slot.getCount() + ") ");
             } else {
-                System.out.print("| [" + i + "] empty ");
+                System.out.print("| [" + visualIndex + "] empty ");
             }
         }
 
         System.out.println("|");
 
-        return inventory.getUnlockedSlots() - 1;
+        return inventory.getUnlockedSlots() - 1 + offset;
     }
 
-    void manageSlots(Inventory inventory) {
+    void manageSlotsPrompt(Inventory inventory) {
         while (true) {
-            var latestOption = showInventory(inventory);
+            var inventoryIndexOffset = 1;
+            var latestOption = printInventorySlots(inventory, inventoryIndexOffset);
 
-            System.out.println("[" + (latestOption + 1) + "] Back");
-            System.out.println("[" + (latestOption + 2) + "] Sort");
+            System.out.println("[" + (latestOption + 1) + "] Sort");
+            System.out.println("[0] Back");
 
             try {
                 var option = readOption(0, latestOption + 2);
 
-                if (option == inventory.getUnlockedSlots()) {
+                if (option == 0) {
                     break;
-                } else if (option == inventory.getUnlockedSlots() + 1) {
+                } else if (option == latestOption + 1) {
                     sortSlots(inventory);
                 } else {
-                    manageSlot(inventory, option);
+                    manageSlot(inventory, option - inventoryIndexOffset);
                 }
             } catch (InvalidInputException e) {
                 System.out.println("Invalid slot or option selected");
@@ -180,11 +186,12 @@ public class Gui {
 
     void sortSlots(Inventory inventory) {
         while (true) {
-            System.out.println("[1] Sort by id");
-            System.out.println("[2] Sort by name");
-            System.out.println("[3] Sort by item type");
-            System.out.println("[4] Sort by weight");
-            System.out.println("[0] Back");
+            System.out.println("Choose parameter to sort on: ");
+            System.out.print("[1] Id ");
+            System.out.print("[2] Name ");
+            System.out.print("[3] Item type ");
+            System.out.println("[4] Weight ");
+            System.out.println("[0] Cancel");
 
             try {
                 var option = readOption(0, 4);
@@ -224,7 +231,7 @@ public class Gui {
 
                     switch (option) {
                         case 0 -> { break manageSlotLoop; }
-                        case 1 -> insertItemToSlot(slot);
+                        case 1 -> insertItemToSlot(inventory, slotIndex);
                     }
                 } catch (InvalidInputException e) {
                     System.out.println("Invalid input");
@@ -235,10 +242,10 @@ public class Gui {
                 System.out.println("Weight: " + slot.getWeight());
                 System.out.println();
 
-                System.out.println("[1] Use item");
-                System.out.println("[2] Increment");
-                System.out.println("[3] Decrement");
-                System.out.println("[4] Remove item");
+                System.out.print("[1] Use item ");
+                System.out.print("[2] Increment ");
+                System.out.print("[3] Decrement ");
+                System.out.print("[4] Remove item ");
                 System.out.println("[5] Swap item");
                 System.out.println("[0] Back");
 
@@ -253,7 +260,7 @@ public class Gui {
                             try {
                                 inventory.incrementSlot(slotIndex);
                             } catch (TooMuchWeightException e) {
-                                System.out.println("Too much weight to add more items to inventory");
+                                System.out.println("Can't add anymore to inventory: too much weight");
                             }
                         }
                         case 3 -> inventory.decrementSlot(slotIndex);
@@ -267,7 +274,7 @@ public class Gui {
         }
     }
 
-    private void insertItemToSlot(Slot slot) {
+    private void insertItemToSlot(Inventory inventory, int slotIndex) {
         while (true) {
             var items = ItemManager.getInstance().getItems();
             System.out.println("Select item to insert");
@@ -281,12 +288,13 @@ public class Gui {
                 var option = readOption(0, items.size() - 1);
 
                 Item item = items.get(option);
-                slot.setItem(item);
-                slot.setCount(1);
+                inventory.insertToSlot(slotIndex, item, 1);
 
                 break;
             } catch (InvalidInputException e) {
                 System.out.println("Invalid item selected");
+            } catch (TooMuchWeightException e) {
+                System.out.println("Can't add anymore to inventory: too much weight");
             }
         }
     }
@@ -295,14 +303,15 @@ public class Gui {
         while (true) {
             System.out.println("Select slot to swap with");
 
-            var latest = showInventory(inventory);
-            System.out.println("[" + (latest + 1) + "] Back");
+            var inventoryIndexOffset = 1;
+            var latest = printInventorySlots(inventory, inventoryIndexOffset);
+            System.out.println("[0] Cancel");
 
             try {
                 var inputOption = readOption(0, latest + 1);
 
-                if (inputOption != latest + 1) {
-                    inventory.swapSlots(slot1, inputOption);
+                if (inputOption != 0) {
+                    inventory.swapSlots(slot1, inputOption - inventoryIndexOffset);
                     System.out.println("Swapped slots");
                     break;
                 }
@@ -340,6 +349,3 @@ public class Gui {
     }
 }
 
-class InvalidInputException extends IOException {
-
-}

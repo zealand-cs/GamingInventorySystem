@@ -10,7 +10,7 @@ public interface InventorySystemRepository {
 
     Inventory newInventory(String name, int unlockedSlots);
     void saveInventory(Inventory inventory);
-    void deleteInventory(int inventoryId);
+    void deleteInventory(Inventory inventory);
 
     List<Item> getItems();
 }
