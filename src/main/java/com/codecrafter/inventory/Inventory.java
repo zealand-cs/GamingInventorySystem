@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Inventory {
-    private int id;
     private String name;
 
     private final Slot[] slots = new Slot[192];
@@ -19,22 +18,13 @@ public class Inventory {
     // Private constructor for JSON reading
     private Inventory() { }
 
-    public Inventory(int id, String name, int unlockedSlots) {
-        this.id = id;
+    public Inventory(String name, int unlockedSlots) {
         this.name = name;
         this.unlockedSlots = unlockedSlots;
 
         for (int i = 0; i < slots.length; i++) {
             slots[i] = new Slot();
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

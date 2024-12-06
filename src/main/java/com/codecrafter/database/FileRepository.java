@@ -17,9 +17,8 @@ class InventoryFile {
         inventories = new ArrayList<>();
     }
 
-    int addInventory(Inventory inventory) {
+    void addInventory(Inventory inventory) {
         inventories.add(inventory);
-        return inventories.size() - 1;
     }
 
     void removeInventory(Inventory inventory) {
@@ -66,9 +65,8 @@ public class FileRepository implements InventorySystemRepository {
 
     @Override
     public Inventory newInventory(String name, int unlockedSlots) {
-        var inventory = new Inventory(-1, name, unlockedSlots);
-        var inventoryId = inventoryFile.addInventory(inventory);
-        inventory.setId(inventoryId);
+        var inventory = new Inventory(name, unlockedSlots);
+        inventoryFile.addInventory(inventory);
 
         saveInventory(null);
 
