@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Removed redundant code">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/MalformedFileException.java" afterDir="false" />
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Gracefully handles malformed files">
+      <change afterPath="$PROJECT_DIR$/inventories.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/newTest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/InventorySystemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/InventorySystemRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/inventory/Inventory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +59,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.Main.executor": "Run",
+    "Application.Main.executor": "Debug",
     "Downloaded.Files.Path.Enabled": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "true",
@@ -193,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733481094662</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Gracefully handles malformed files">
+      <option name="closed" value="true" />
+      <created>1733482464965</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1733482464965</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +233,8 @@
     <MESSAGE value="Program doesn't crash when inputting invalid character" />
     <MESSAGE value="Saving and restoring now works completely. All items and all data is now stored in a file for all inventories." />
     <MESSAGE value="Removed redundant code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed redundant code" />
+    <MESSAGE value="Gracefully handles malformed files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gracefully handles malformed files" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

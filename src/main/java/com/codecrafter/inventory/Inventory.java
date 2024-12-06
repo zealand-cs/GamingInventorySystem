@@ -3,7 +3,11 @@ package com.codecrafter.inventory;
 import com.codecrafter.exceptions.InvalidSlotException;
 import com.codecrafter.exceptions.TooMuchWeightException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -121,6 +125,16 @@ public class Inventory {
         Slot tmp = slots[slot1];
         slots[slot1] = slots[slot2];
         slots[slot2] = tmp;
+    }
+
+    public void writeToFile(Writer w) throws IOException {
+        var mapper = new ObjectMapper();
+        mapper.writeValue(w, this);
+    }
+
+    public static Inventory fromFile(File file) throws IOException {
+        var mapper = new ObjectMapper();
+        return mapper.readValue(file, Inventory.class);
     }
 }
 

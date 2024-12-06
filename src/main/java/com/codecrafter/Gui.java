@@ -7,6 +7,9 @@ import com.codecrafter.exceptions.TooMuchWeightException;
 import com.codecrafter.inventory.*;
 import com.codecrafter.items.ItemManager;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -37,8 +40,23 @@ public class Gui {
                     case 1 -> inventory = selectInventoryPrompt(inventories);
                     case 2 -> inventory = createInventoryPrompt();
                     case 3 -> {
-                        // TODO: Import an inventory file
-                        System.out.println("Not implemented");
+                        System.out.println("Enter the filepath to the file you want to import: ");
+                        var fileName = scanner.nextLine();
+                        try {
+                            var file = new File(fileName);
+
+                            Inventory importedInventory = Inventory.fromFile(file);
+                            var inventoryName = importedInventory.getName() + " (imported)";
+                            importedInventory.setName(inventoryName);
+
+                            repository.addInventory(importedInventory);
+                            repository.save();
+
+                            System.out.println("Imported inventory: " + inventoryName);
+                            inventory = importedInventory;
+                        } catch (IOException e) {
+                            System.out.println("Error when reading file " + fileName + ". Is the path correct? Is the file valid?");
+                        }
                     }
                     default -> {
                         break mainLoop;
@@ -46,7 +64,7 @@ public class Gui {
                 };
 
                 if (inventory != null) {
-                    inventoryManagement(inventory);
+                    manageInventoryPrompt(inventory);
                 }
             } catch (InvalidInputException e) {
                 System.out.println("Invalid option");
@@ -89,38 +107,53 @@ public class Gui {
         }
     }
 
-    void inventoryManagement(Inventory inventory) {
+    void manageInventoryPrompt(Inventory inventory) {
         inventoryLoop: while(true) {
             printInventoryStats(inventory);
 
             System.out.print("[1] Show slots ");
-            System.out.print("[2] Export inventory ");
-            System.out.println("[3] Delete inventory ");
+            System.out.print("[2] Rename inventory ");
+            System.out.print("[3] Export inventory ");
+            System.out.println("[4] Delete inventory ");
             System.out.println("[0] Save and leave inventory");
 
             try {
-                var option = readOption(0, 3);
+                var option = readOption(0, 4);
 
                 switch (option) {
                     case 0 -> {
-                        repository.saveInventory(inventory);
+                        repository.save();
                         break inventoryLoop;
                     }
                     case 1 -> manageSlotsPrompt(inventory);
                     case 2 -> {
-                        // TODO: Implement export to file
-                        System.out.println("Not implemented");
+                        System.out.println("Enter new name of the inventory (old: " + inventory.getName() + ")");
+                        var newName = scanner.nextLine();
+                        inventory.setName(newName.trim());
+                        repository.save();
                     }
                     case 3 -> {
-                        repository.deleteInventory(inventory);
+                        System.out.println("Input file path to export to: ");
+                        var path = scanner.nextLine();
+                        try {
+                            var file = new FileWriter(path, false);
+
+                            inventory.writeToFile(file);
+                        } catch (IOException e) {
+                            System.out.println("Error when exporting the inventory. Try another path.");
+                        }
+                    }
+                    case 4 -> {
+                        repository.removeInventory(inventory);
+                        repository.save();
+
                         System.out.println("Deleted inventory");
                         break inventoryLoop;
                     }
                 }
             } catch (InvalidInputException e) {
-                throw new RuntimeException(e);
+                System.out.println("Invalid input option");
             }
-
         }
     }
 

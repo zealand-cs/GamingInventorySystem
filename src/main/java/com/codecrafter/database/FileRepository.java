@@ -67,13 +67,13 @@ public class FileRepository implements InventorySystemRepository {
         var inventory = new Inventory(name, unlockedSlots);
         inventoryFile.addInventory(inventory);
 
-        saveInventory(null);
+        save();
 
         return inventory;
     }
 
     @Override
-    public void saveInventory(Inventory inventory) {
+    public void save() {
         // Inventory already in inventory list, so just write file again
         try (FileWriter file = new FileWriter(fileName, false)) {
             ObjectMapper mapper = new ObjectMapper();
@@ -83,10 +83,13 @@ public class FileRepository implements InventorySystemRepository {
         }
     }
 
+    public void addInventory(Inventory inventory) {
+        inventoryFile.addInventory(inventory);
+    }
+
     @Override
-    public void deleteInventory(Inventory inventory) {
+    public void removeInventory(Inventory inventory) {
         inventoryFile.removeInventory(inventory);
-        saveInventory(null);
     }
 
     @Override
