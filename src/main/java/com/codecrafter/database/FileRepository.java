@@ -91,10 +91,5 @@ public class FileRepository implements InventorySystemRepository {
     public void removeInventory(Inventory inventory) {
         inventoryFile.removeInventory(inventory);
     }
-
-    @Override
-    public List<Item> getItems() {
-        return List.of();
-    }
 }
 

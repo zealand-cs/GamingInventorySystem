@@ -23,7 +23,7 @@ public class Gui {
         this.repository = repository;
     }
 
-    void start() {
+    public void start() {
         mainLoop: while (true) {
             System.out.println("[1] Select inventory");
             System.out.println("[2] New inventory");
@@ -72,7 +72,7 @@ public class Gui {
         }
     }
 
-    Inventory createInventoryPrompt() {
+    private Inventory createInventoryPrompt() {
         System.out.print("Name of the new inventory: ");
 
         var name = scanner.nextLine();
@@ -107,7 +107,7 @@ public class Gui {
         }
     }
 
-    void manageInventoryPrompt(Inventory inventory) {
+    private void manageInventoryPrompt(Inventory inventory) {
         inventoryLoop: while(true) {
             printInventoryStats(inventory);
 
@@ -167,7 +167,7 @@ public class Gui {
     /// Prints all inventory slots in the terminal shown as options. Starting at selection index startIndex.
     ///
     /// Returns an int which is the latest index showed
-    int printInventorySlots(Inventory inventory, int offset) {
+    private int printInventorySlots(Inventory inventory, int offset) {
         int rowLength = 8;
 
         var slots = inventory.getSlots();
@@ -192,7 +192,7 @@ public class Gui {
         return inventory.getUnlockedSlots() - 1 + offset;
     }
 
-    void manageSlotsPrompt(Inventory inventory) {
+    private void manageSlotsPrompt(Inventory inventory) {
         while (true) {
             var inventoryIndexOffset = 1;
             var latestOption = printInventorySlots(inventory, inventoryIndexOffset);
@@ -216,8 +216,7 @@ public class Gui {
         }
     }
 
-
-    void sortSlots(Inventory inventory) {
+    private void sortSlots(Inventory inventory) {
         while (true) {
             System.out.println("Choose parameter to sort on: ");
             System.out.print("[1] Id ");
@@ -245,7 +244,7 @@ public class Gui {
     }
 
 
-    void manageSlot(Inventory inventory, int slotIndex) throws InvalidInputException {
+    private void manageSlot(Inventory inventory, int slotIndex) throws InvalidInputException {
         manageSlotLoop: while (true) {
             Slot slot = null;
             try {
@@ -332,7 +331,7 @@ public class Gui {
         }
     }
 
-    void swapSlots(Inventory inventory, int slot1) {
+    private void swapSlots(Inventory inventory, int slot1) {
         while (true) {
             System.out.println("Select slot to swap with");
 
@@ -359,20 +358,20 @@ public class Gui {
     ///
     /// If the number is not in this range, invalidInputText is printed, and you
     /// get to choose again
-    int readOption(int min, int max) throws InvalidInputException {
+    private int readOption(int min, int max) throws InvalidInputException {
         return readOption(scanner, min, max);
     }
 
-    int readOption(int[] allowed) throws InvalidInputException {
+    private int readOption(int[] allowed) throws InvalidInputException {
         return readOption(scanner, allowed);
     }
 
-    static int readOption(Scanner scanner, int min, int max) throws InvalidInputException {
+    public static int readOption(Scanner scanner, int min, int max) throws InvalidInputException {
         return readOption(scanner, IntStream.rangeClosed(min, max).toArray());
     }
 
     /// Read a number input in an array that's allowed
-    static int readOption(Scanner scanner, int[] allowed) throws InvalidInputException {
+    public static int readOption(Scanner scanner, int[] allowed) throws InvalidInputException {
         try {
             var option = scanner.nextInt();
             scanner.nextLine();

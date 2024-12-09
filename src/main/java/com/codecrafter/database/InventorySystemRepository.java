@@ -1,7 +1,6 @@
 package com.codecrafter.database;
 
 import com.codecrafter.inventory.Inventory;
-import com.codecrafter.inventory.Item;
 
 import java.util.List;
 
@@ -12,6 +11,4 @@ public interface InventorySystemRepository {
     void save();
     void addInventory(Inventory inventory);
     void removeInventory(Inventory inventory);
-
-    List<Item> getItems();
 }
