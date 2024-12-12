@@ -6,6 +6,7 @@ import com.codecrafter.exceptions.InvalidSlotException;
 import com.codecrafter.exceptions.TooMuchWeightException;
 import com.codecrafter.inventory.*;
 import com.codecrafter.items.ItemManager;
+import com.codecrafter.items.WeaponItem;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -301,6 +302,9 @@ public class Gui {
                     }
                 } catch (InvalidInputException e) {
                     System.out.println("Invalid input");
+                } catch (InvalidSlotException e) {
+                    // This branch shouldn't really be possible, but we're handling it anyway
+                    System.out.println("Invalid slot selected");
                 }
             }
         }
@@ -325,6 +329,9 @@ public class Gui {
                 break;
             } catch (InvalidInputException e) {
                 System.out.println("Invalid item selected");
+            } catch (InvalidSlotException e) {
+                // This branch shouldn't really be possible, but we're handling it anyway
+                System.out.println("Invalid slot selected");
             } catch (TooMuchWeightException e) {
                 System.out.println("Can't add anymore to inventory: too much weight");
             }

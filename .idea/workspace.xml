@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Export and import implemented fully">
-      <change afterPath="$PROJECT_DIR$/inventories.json" afterDir="false" />
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Small cleanup of different stuff.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/Gui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/InventorySystemRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GamingInventorySystem/com/codecrafter/database/InventorySystemRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ArmorItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/items/ArmorItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Slot.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733486675314</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Small cleanup of different stuff.">
+      <option name="closed" value="true" />
+      <created>1733778356086</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733778356086</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -240,7 +244,8 @@
     <MESSAGE value="Removed redundant code" />
     <MESSAGE value="Gracefully handles malformed files" />
     <MESSAGE value="Export and import implemented fully" />
-    <option name="LAST_COMMIT_MESSAGE" value="Export and import implemented fully" />
+    <MESSAGE value="Small cleanup of different stuff." />
+    <option name="LAST_COMMIT_MESSAGE" value="Small cleanup of different stuff." />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
