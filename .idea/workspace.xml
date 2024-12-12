@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Began commenting code">
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Documented exceptions and the data repository">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/MalformedFileException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/MalformedFileException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidInputException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidInputException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidSlotException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidSlotException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/TooMuchWeightException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/TooMuchWeightException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/ItemType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/ItemType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/SortValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/SortValue.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734012495885</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Documented exceptions and the data repository">
+      <option name="closed" value="true" />
+      <created>1734013188396</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1734013188396</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -258,7 +263,8 @@
     <MESSAGE value="Export and import implemented fully" />
     <MESSAGE value="Small cleanup of different stuff." />
     <MESSAGE value="Began commenting code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Began commenting code" />
+    <MESSAGE value="Documented exceptions and the data repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="Documented exceptions and the data repository" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

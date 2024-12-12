@@ -1,7 +1,6 @@
 package com.codecrafter;
 
 import com.codecrafter.database.FileRepository;
-import com.codecrafter.database.InventorySystemRepository;
 
 import com.codecrafter.exceptions.MalformedFileException;
 import com.codecrafter.exceptions.InvalidInputException;
@@ -18,12 +17,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * Of course, the main entrypoint of the program
+     */
     public static void main(String[] args) {
         String dataFile = "inventories.json";
 
-        FileRepository fileRepo = null;
-        fileRepo = createFileRepository(fileRepo, dataFile);
+        FileRepository fileRepo = createFileRepository(dataFile);
 
+        // Create items to use in the app. These are hardcoded, so they mean the same thing
+        // in different devices, when importing and exporting data
         List<Item> items = new ArrayList<>() {{
             add(new WeaponItem(0, "Sword of Might", 0.5, 1, WeaponHandedness.MainHand, 10, 100));
             add(new WeaponItem(1, "Longsword", 1, 1, WeaponHandedness.TwoHand, 8, 150));
@@ -31,17 +34,24 @@ public class Main {
             add(new ConsumablePotion(3, "Heavy Stone", 2.5, 20));
         }};
 
+        // Add the items to the item manager
         for (Item item : items) {
             ItemManager.getInstance().insertItem(item);
         }
 
-        InventorySystemRepository repo = fileRepo;
-
-        var gui = new Gui(repo);
+        var gui = new Gui(fileRepo);
         gui.start();
     }
 
-    private static @NotNull FileRepository createFileRepository(FileRepository fileRepo, String dataFile) {
+    /**
+     * Helper function to create a new file repository.
+     * Some could argue that this should be present in the Gui class.
+     * @param dataFile the name of the file that we should initialize the repository from.
+     * @return a FileRepository that handles writing and reading a file
+     */
+    private static @NotNull FileRepository createFileRepository(String dataFile) {
+        FileRepository fileRepo = null;
+
         while (fileRepo == null) {
             try {
                 fileRepo = new FileRepository(dataFile);
