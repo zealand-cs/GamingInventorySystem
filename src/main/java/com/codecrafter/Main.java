@@ -3,7 +3,7 @@ package com.codecrafter;
 import com.codecrafter.database.FileRepository;
 import com.codecrafter.database.InventorySystemRepository;
 
-import com.codecrafter.database.MalformedFileException;
+import com.codecrafter.exceptions.MalformedFileException;
 import com.codecrafter.exceptions.InvalidInputException;
 import com.codecrafter.inventory.Item;
 import com.codecrafter.items.ConsumablePotion;

@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Small cleanup of different stuff.">
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Began commenting code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/inventory/Slot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/FileRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/InventorySystemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/database/MalformedFileException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/MalformedFileException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidInputException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidInputException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidSlotException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/InvalidSlotException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/TooMuchWeightException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecrafter/exceptions/TooMuchWeightException.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +80,7 @@
       <module name="GamingInventorySystem" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.codecrafter.database.*" />
+          <option name="PATTERN" value="com.codecrafter.exceptions.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -214,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733778356086</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Began commenting code">
+      <option name="closed" value="true" />
+      <created>1734012495885</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1734012495885</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,7 +257,8 @@
     <MESSAGE value="Gracefully handles malformed files" />
     <MESSAGE value="Export and import implemented fully" />
     <MESSAGE value="Small cleanup of different stuff." />
-    <option name="LAST_COMMIT_MESSAGE" value="Small cleanup of different stuff." />
+    <MESSAGE value="Began commenting code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Began commenting code" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
