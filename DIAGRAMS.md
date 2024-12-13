@@ -367,6 +367,8 @@ classDiagram
 		-readOption(Scanner scanner, int[] allowed) int$
 	}
 
+	Gui ..> InvalidInputException: throws
+
 	Gui "1" --> "1" InventorySystemRepository
 	Gui ..> ItemManager
 	Gui ..> Inventory 
@@ -391,6 +393,8 @@ classDiagram
 		+addInventory(Inventory inventory)
 		+removeInventory(Inventory inventory)
 	}
+
+	FileRepository ..> MalformedFileException: throws
 
 	FileRepository ..|> InventorySystemRepository
 	FileRepository "1" --> "1" InventoryFile
@@ -429,6 +433,9 @@ classDiagram
 		+writeToFile(Writer w)
 		+fromFile(File file) Inventory$
 	}
+
+	Inventory ..> InvalidSlotException: throws
+	Inventory ..> TooMuchWeightException: throws
 	
 	Inventory "1" --> "192" Slot
 	Inventory ..> SortValue
@@ -548,4 +555,9 @@ classDiagram
 	
 	ThrowingWeapon --|> Item
 	ThrowingWeapon "1" --> "1" WeaponHandedness
+
+	class MalformedFileException { }
+	class InvalidInputException { }
+	class InvalidSlotException { }
+	class TooMuchWeightException { }
 ```
