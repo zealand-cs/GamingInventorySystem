@@ -340,6 +340,12 @@ classDiagram
 		-createFileRepository(FileRepository fileRepo, String dataFile) FileRepository$
 	}
 
+	Main ..> Gui
+	Main ..> FileRepository
+	Main ..> Item
+	Main ..> WeaponItem
+	Main ..> ConsumablePotion
+
 	class Gui {
 		+Gui(InventorySystemRepository repository)
 		-InventorySystemRepository repository
@@ -361,7 +367,9 @@ classDiagram
 		-readOption(Scanner scanner, int[] allowed) int$
 	}
 
-	Gui --> InventorySystemRepository
+	Gui "1" --> "1" InventorySystemRepository
+	Gui ..> ItemManager
+	Gui ..> Inventory 
 
 	class InventorySystemRepository {
 		<<Interface>>
@@ -385,7 +393,7 @@ classDiagram
 	}
 
 	FileRepository ..|> InventorySystemRepository
-	FileRepository --> InventoryFile
+	FileRepository "1" --> "1" InventoryFile
 
 	class InventoryFile {
 		-List~Inventory~ inventories
@@ -396,7 +404,7 @@ classDiagram
 		+inventoryCount() int
 	}
 
-	InventoryFile --> Inventory
+	InventoryFile "1" --> "0..*" Inventory
 
 	class Inventory {
 		-String name
@@ -422,8 +430,8 @@ classDiagram
 		+fromFile(File file) Inventory$
 	}
 	
-	Inventory --> Slot
-	Inventory --> SortValue
+	Inventory "1" --> "192" Slot
+	Inventory ..> SortValue
 
 	class SortValue {
 		<<Enumeration>>
@@ -450,7 +458,7 @@ classDiagram
 		+clear()
 	}
 
-	Slot --> Item
+	Slot "1" --> "1" Item
 
 	class ItemType {
 		<<Enumeration>>
@@ -481,7 +489,7 @@ classDiagram
 		+setMaxStack(int maxStack)
 	}
 
-	Item --> ItemType
+	Item "1" --> "1" ItemType
 
 	class ItemManager {
 		-ItemManager instance$
@@ -526,7 +534,7 @@ classDiagram
 	}
 	
 	WeaponItem --|> Item
-	WeaponItem --> WeaponHandedness
+	WeaponItem "1" --> "1" WeaponHandedness
 	
 	class ThrowingWeapon {
 		-WeaponHandedness weaponHandedness
@@ -539,5 +547,5 @@ classDiagram
 	}
 	
 	ThrowingWeapon --|> Item
-	ThrowingWeapon --> WeaponHandedness
+	ThrowingWeapon "1" --> "1" WeaponHandedness
 ```
