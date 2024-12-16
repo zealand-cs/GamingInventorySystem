@@ -6,7 +6,6 @@ import com.codecrafter.exceptions.InvalidSlotException;
 import com.codecrafter.exceptions.TooMuchWeightException;
 import com.codecrafter.inventory.*;
 import com.codecrafter.items.ItemManager;
-import com.codecrafter.items.WeaponItem;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -361,23 +360,27 @@ public class Gui {
         }
     }
 
-    /// Read a number input between min (inclusive) and max (inclusive).
-    ///
-    /// If the number is not in this range, invalidInputText is printed, and you
-    /// get to choose again
+    /**
+     * Read a number input in a range.
+     * If the number is not in this range, invalidInputText is printed, and you
+     * get to choose again
+     * @param min minimum option value (inclusive)
+     * @param max maximum option value (inclusive)
+     * @return the selected option
+     * @throws InvalidInputException when an invalid input is given
+     */
     private int readOption(int min, int max) throws InvalidInputException {
         return readOption(scanner, min, max);
-    }
-
-    private int readOption(int[] allowed) throws InvalidInputException {
-        return readOption(scanner, allowed);
     }
 
     public static int readOption(Scanner scanner, int min, int max) throws InvalidInputException {
         return readOption(scanner, IntStream.rangeClosed(min, max).toArray());
     }
 
-    /// Read a number input in an array that's allowed
+    /**
+     * Read a number input in an array that's allowed
+     */
+
     public static int readOption(Scanner scanner, int[] allowed) throws InvalidInputException {
         try {
             var option = scanner.nextInt();

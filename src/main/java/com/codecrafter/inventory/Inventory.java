@@ -14,9 +14,19 @@ import java.util.Comparator;
 /**
  * The primary class to manage and manipulate an inventory.
  * The inventory is designed able to be converted into a JSON string and deserialized with
- * the help of the Jackson library
+ * the help of the Jackson library.
  */
 public class Inventory {
+    /**
+     * The max-weight that an inventory can carry.
+     * Currently, it is not possible to modify this parameter.
+     */
+    final static double MAX_WEIGHT = 50;
+    /**
+     * The maximum number of slots that you can unlock in the inventory
+     */
+    final static int MAX_SLOTS = 192;
+
     /**
      * Name of the inventory.
      * Primarily used as a human-readable way of distinguishing this inventory from others.
@@ -26,18 +36,12 @@ public class Inventory {
     /**
      * All slots that an inventory is able to have.
      */
-    private final Slot[] slots = new Slot[192];
+    private final Slot[] slots = new Slot[MAX_SLOTS];
     /**
      * The number of slots that are unlocked. If this is less than the total length
      * of the slots variable, only those fields will be available through the getter.
      */
     private int unlockedSlots;
-
-    /**
-     * The max-weight that an inventory can carry.
-     * Currently, it is not possible to modify this parameter.
-     */
-    final static double MAX_WEIGHT = 50;
 
     /**
      * Private empty constructor for Jackson to properly convert JSON to objects
