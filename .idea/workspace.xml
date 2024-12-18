@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Removed magic number and made it a constant">
+    <list default="true" id="9760f6de-0dbc-420e-8e00-33efe206d4b3" name="Changes" comment="Javadocs for Gui class">
       <change afterPath="$PROJECT_DIR$/inventories.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/inventory_export.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -254,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734339654029</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Javadocs for Gui class">
+      <option name="closed" value="true" />
+      <created>1734344688543</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1734344688544</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -290,7 +298,8 @@
     <MESSAGE value="More documentation" />
     <MESSAGE value="Documented items" />
     <MESSAGE value="Removed magic number and made it a constant" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed magic number and made it a constant" />
+    <MESSAGE value="Javadocs for Gui class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Javadocs for Gui class" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

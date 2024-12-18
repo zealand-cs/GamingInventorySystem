@@ -143,6 +143,7 @@ public class Gui {
      * @param inventory the inventory to manage and see
      */
     private void manageInventoryPrompt(Inventory inventory) {
+        // Loop will run until the while-loop with label is broken.
         inventoryLoop: while(true) {
             printInventoryStats(inventory);
 
@@ -214,13 +215,16 @@ public class Gui {
 
         var slots = inventory.getSlots();
 
+        // Loops over all slots in inventory
         for (int i = 0; i < slots.length; i++) {
             Slot slot = slots[i];
 
+            // Used for printing a newline to have the items laid out in rows of rowLength.
             if (i != 0 && i % rowLength == 0) {
                 System.out.println("|");
             }
 
+            // Handle empty and filled slots differently
             var visualIndex = i + offset;
             if (slot.isNotEmpty()) {
                 System.out.print("| [" + visualIndex + "] " + slot.getItem().getName() + " (" + slot.getCount() + ") ");
@@ -239,6 +243,7 @@ public class Gui {
      * @param inventory the inventory to manage slots form
      */
     private void manageSlotsPrompt(Inventory inventory) {
+        // Loop until broken out of.
         while (true) {
             var inventoryIndexOffset = 1;
             var latestOption = printInventorySlots(inventory, inventoryIndexOffset);
@@ -275,6 +280,7 @@ public class Gui {
             System.out.println("[4] Weight ");
             System.out.println("[0] Cancel");
 
+            // Handle user selection
             try {
                 var option = readOption(0, 4);
 
@@ -300,6 +306,7 @@ public class Gui {
      * @throws InvalidInputException thrown when an invalid slot index is used
      */
     private void manageSlot(Inventory inventory, int slotIndex) throws InvalidInputException {
+        // Continues until broken out of
         manageSlotLoop: while (true) {
             Slot slot = null;
             try {
@@ -308,6 +315,7 @@ public class Gui {
                 throw new InvalidInputException();
             }
 
+            // Handle slot for when it's either empty or not
             if (slot.isEmpty()) {
                 System.out.println("Slot is empty");
                 System.out.println("[1] Insert item");
@@ -336,10 +344,10 @@ public class Gui {
                 System.out.println("[5] Swap item");
                 System.out.println("[0] Back");
 
+                // Handle the selected option
                 try {
                     var option = readOption(0, 5);
 
-                    // Handle selection
                     switch (option) {
                         case 0 -> { break manageSlotLoop; }
                         case 1 -> slot.use();
@@ -370,10 +378,12 @@ public class Gui {
      * @param slotIndex the slot index in which to insert an item
      */
     private void insertItemToSlot(Inventory inventory, int slotIndex) {
+        // Loop until broken
         while (true) {
             var items = ItemManager.getInstance().getItems();
             System.out.println("Select item to insert");
 
+            // Print all items in a list with assigned numbers, to easily get.
             for (int i = 0; i < items.size(); i++) {
                 Item item = items.get(i);
                 System.out.println("[" + i + "] " + item.getName());
@@ -404,6 +414,7 @@ public class Gui {
      * @param slot1 the first slot selected
      */
     private void swapSlots(Inventory inventory, int slot1) {
+        // Loop until broken
         while (true) {
             System.out.println("Select slot to swap with");
 
